@@ -2,19 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:ridex/map_page.dart';
 // cupertino package was unuses
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 
 // function to trigger the app build
 void main() => runApp(const MyApp());
-
-_makingPhoneCall() async {
-  var url = Uri.parse("tel:9776765434");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -23,7 +14,6 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MapPage(),
-
       /*Scaffold(
         appBar: AppBar(
           title: const Text('Ride taxi service'),
@@ -52,12 +42,7 @@ class MyApp extends StatelessWidget {
                   height: 20.0,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MapPage()));
-                  },
+                  onPressed: () {},
                   style: ButtonStyle(
                     padding:
                         MaterialStateProperty.all(const EdgeInsets.all(5.0)),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -14,10 +15,10 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   // in the below line, we are initializing our controller for google maps.
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 
   // in the below line, we are specifying our camera position
-  static final CameraPosition _kGoogle = const CameraPosition(
+  static const CameraPosition _kGoogle = CameraPosition(
     target: LatLng(37.42796133580664, -122.885749655962),
     zoom: 14.4746,
   );
@@ -28,26 +29,38 @@ class _MapPageState extends State<MapPage> {
         // in the below line, we are specifying our app bar.
         appBar: AppBar(
           // setting background color for app bar
-          backgroundColor: Color(0xFF0F9D58),
+          backgroundColor: const Color(0xFFCEFA0B),
           // setting title for app bar.
-          title: Text("Pick Location"),
-        ),
-        body: Container(
-          // in the below line, creating google maps.
-          child: GoogleMap(
-            // in the below line, setting camera position
-            initialCameraPosition: _kGoogle,
-            // in the below line, specifying map type.
-            mapType: MapType.normal,
-            // in the below line, setting user location enabled.
-            myLocationEnabled: true,
-            // in the below line, setting compass enabled.
-            compassEnabled: true,
-            // in the below line, specifying controller on map complete.
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
+          title: const Text("Ride"),
+          leading: GestureDetector(
+            onTap: _makingPhoneCall,
+            child: const Icon(
+              Icons.phone, // add custom icons also
+            ),
           ),
+        ),
+        body: GoogleMap(
+          // in the below line, setting camera position
+          initialCameraPosition: _kGoogle,
+          // in the below line, specifying map type.
+          mapType: MapType.normal,
+          // in the below line, setting user location enabled.
+          myLocationEnabled: true,
+          // in the below line, setting compass enabled.
+          compassEnabled: true,
+          // in the below line, specifying controller on map complete.
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
         ));
+  }
+}
+
+_makingPhoneCall() async {
+  var url = Uri.parse("tel:9776765434");
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
