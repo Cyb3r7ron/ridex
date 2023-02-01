@@ -1,5 +1,6 @@
 // importing dependencies
 import 'package:flutter/material.dart';
+import 'package:ridex/map_page.dart';
 // cupertino package was unuses
 import 'package:url_launcher/url_launcher.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Geeks for Geeks'),
+          title: const Text('Ride taxi service'),
           backgroundColor: Colors.green,
         ), // AppBar
         body: SafeArea(
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                   height: 250.0,
                 ), //Container
                 const Text(
-                  'Welcome to GFG!',
+                  'Welcome to Ride!',
                   style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.green,
@@ -55,6 +56,22 @@ class MyApp extends StatelessWidget {
                   height: 20.0,
                 ),
                 ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MapPage()));
+                  },
+                  style: ButtonStyle(
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.all(5.0)),
+                    textStyle: MaterialStateProperty.all(
+                      const TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  child: const Text('Pick Location'),
+                ), //
+                ElevatedButton(
                   onPressed: _makingPhoneCall,
                   style: ButtonStyle(
                     padding:
@@ -63,8 +80,9 @@ class MyApp extends StatelessWidget {
                       const TextStyle(color: Colors.black),
                     ),
                   ),
-                  child: const Text('Here'),
-                ), // ElevatedButton
+                  child: const Text('Call'),
+                ),
+                // ElevatedButton
 
                 // DEPRECATED
                 // RaisedButton(
