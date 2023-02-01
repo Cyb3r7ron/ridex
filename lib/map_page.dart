@@ -60,7 +60,7 @@ class _MapPageState extends State<MapPage> {
 }
 
 _makingPhoneCall() async {
-  var url = Uri.parse("tel:9776765434");
+  var url = Uri.parse("tel:+251931587237");
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
