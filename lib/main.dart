@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Ride taxi service'),
@@ -44,14 +45,7 @@ class MyApp extends StatelessWidget {
                 Container(
                   height: 20.0,
                 ),
-                const Text(
-                  'For further Updates',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+
                 Container(
                   height: 20.0,
                 ),
@@ -70,7 +64,8 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   child: const Text('Pick Location'),
-                ), //
+                ),
+                const SizedBox(height: 15), //
                 ElevatedButton(
                   onPressed: _makingPhoneCall,
                   style: ButtonStyle(
