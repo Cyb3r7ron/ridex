@@ -31,11 +31,14 @@ class _MapPageState extends State<MapPage> {
           // setting background color for app bar
           backgroundColor: const Color(0xFFCEFA0B),
           // setting title for app bar.
-          title: const Text("Ride"),
-          leading: GestureDetector(
-            onTap: _makingPhoneCall,
-            child: const Icon(
-              Icons.phone, // add custom icons also
+          title: const Center(child: Text("Ride")),
+          leading: Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: _makingPhoneCall,
+              child: const Icon(
+                Icons.phone, // add custom icons also
+              ),
             ),
           ),
         ),
