@@ -29,7 +29,7 @@ class _MapPageState extends State<MapPage> {
         // in the below line, we are specifying our app bar.
         appBar: AppBar(
           // setting background color for app bar
-          backgroundColor: const Color(0xFFCEFA0B),
+          backgroundColor: const Color(0xFFE4F311),
           // setting title for app bar.
           title: const Center(child: Text("Ride")),
           leading: Padding(
