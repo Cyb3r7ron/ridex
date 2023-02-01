@@ -20,9 +20,11 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: MapPage(),
+
+      /*Scaffold(
         appBar: AppBar(
           title: const Text('Ride taxi service'),
           backgroundColor: Colors.green,
@@ -90,7 +92,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ),*/
     );
   }
 }
