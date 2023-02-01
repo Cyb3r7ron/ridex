@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
@@ -11,55 +13,41 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  GoogleMapController? mapController; //contrller for Google map
-  Set<Marker> markers = {}; //markers for google map
-  LatLng showLocation = const LatLng(27.7089427, 85.3086209);
-  //location to show in map
+  // in the below line, we are initializing our controller for google maps.
+  Completer<GoogleMapController> _controller = Completer();
 
-  @override
-  void initState() {
-    markers.add(
-      Marker(
-        //add marker on google map
-        markerId: MarkerId(showLocation.toString()),
-        position: showLocation, //position of marker
-        infoWindow: const InfoWindow(
-          //popup info
-          title: 'Address',
-          snippet: 'Address',
-        ),
-        icon: BitmapDescriptor.defaultMarker, //Icon for Marker
-      ),
-    );
-
-    //you can add more markers here
-    super.initState();
-  }
+  // in the below line, we are specifying our camera position
+  static final CameraPosition _kGoogle = const CameraPosition(
+    target: LatLng(37.42796133580664, -122.885749655962),
+    zoom: 14.4746,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Pick Location"),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: GoogleMap(
-        //Map widget from google_maps_flutter package
-        zoomGesturesEnabled: true, //enable Zoom in, out on map
-        initialCameraPosition: CameraPosition(
-          //innital position in map
-          target: showLocation, //initial position
-          zoom: 10.0, //initial zoom level
+        // in the below line, we are specifying our app bar.
+        appBar: AppBar(
+          // setting background color for app bar
+          backgroundColor: Color(0xFF0F9D58),
+          // setting title for app bar.
+          title: Text("Pick Location"),
         ),
-        markers: markers, //markers to show on map
-        mapType: MapType.normal, //map type
-        onMapCreated: (controller) {
-          //method called when map is created
-          setState(() {
-            mapController = controller;
-          });
-        },
-      ),
-    );
+        body: Container(
+          // in the below line, creating google maps.
+          child: GoogleMap(
+            // in the below line, setting camera position
+            initialCameraPosition: _kGoogle,
+            // in the below line, specifying map type.
+            mapType: MapType.normal,
+            // in the below line, setting user location enabled.
+            myLocationEnabled: true,
+            // in the below line, setting compass enabled.
+            compassEnabled: true,
+            // in the below line, specifying controller on map complete.
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
+        ));
   }
 }
