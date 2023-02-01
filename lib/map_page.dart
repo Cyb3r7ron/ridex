@@ -31,9 +31,9 @@ class _MapPageState extends State<MapPage> {
           // setting background color for app bar
           backgroundColor: const Color(0xFFE4F311),
           // setting title for app bar.
-          title: const Center(child: Text("Ride")),
+          title: const Text("Ride"),
           leading: Padding(
-            padding: const EdgeInsets.only(right: 20.0),
+            padding: const EdgeInsets.only(left: 25.0),
             child: GestureDetector(
               onTap: _makingPhoneCall,
               child: const Icon(
