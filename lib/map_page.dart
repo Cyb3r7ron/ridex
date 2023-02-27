@@ -25,7 +25,7 @@ class _MapPageState extends State<MapPage> {
 
   void addCustomIcon() {
     BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), "assets/Location_marker.png")
+            const ImageConfiguration(), "assets/Location_marker.svg")
         .then(
       (icon) {
         setState(() {
@@ -57,7 +57,7 @@ class _MapPageState extends State<MapPage> {
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: initialLocation,
-          zoom: 14,
+          zoom: 8,
         ),
         markers: {
           Marker(
