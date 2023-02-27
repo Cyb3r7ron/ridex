@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+//import 'package:flutter/src/widgets/container.dart';
+//import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -33,6 +38,22 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // in the below line, we are specifying our app bar.
+      appBar: AppBar(
+        // setting background color for app bar
+        backgroundColor: const Color(0xFFE4F311),
+        // setting title for app bar.
+        title: const Text("Ride"),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 25.0),
+          child: GestureDetector(
+            onTap: _makingPhoneCall,
+            child: const Icon(
+              Icons.phone, // add custom icons also
+            ),
+          ),
+        ),
+      ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: initialLocation,
@@ -48,12 +69,21 @@ class _MapPageState extends State<MapPage> {
             },
             icon: markerIcon,
           ),
-          Marker(
-            markerId: const MarkerId("marker2"),
-            position: const LatLng(37.415768808487435, -122.08440050482749),
+          const Marker(
+            markerId: MarkerId("marker2"),
+            position: LatLng(37.415768808487435, -122.08440050482749),
           ),
         },
       ),
     );
+  }
+}
+
+_makingPhoneCall() async {
+  var url = Uri.parse("tel:+251931587237");
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
