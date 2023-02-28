@@ -14,7 +14,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  LatLng initialLocation = const LatLng(37.422131, -122.084801);
+  LatLng initialLocation = const LatLng(9.040573977956889, 38.76331086994915);
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
 
   @override
@@ -62,7 +62,7 @@ class _MapPageState extends State<MapPage> {
         markers: {
           Marker(
             markerId: const MarkerId("marker1"),
-            position: const LatLng(37.422131, -122.084801),
+            position: const LatLng(9.040573977956889, 38.76331086994915),
             draggable: true,
             onDragEnd: (value) {
               // value is the new position
@@ -71,7 +71,7 @@ class _MapPageState extends State<MapPage> {
           ),
           const Marker(
             markerId: MarkerId("marker2"),
-            position: LatLng(37.415768808487435, -122.08440050482749),
+            position: LatLng(9.041075807059414, 38.76387604184933),
           ),
         },
       ),
