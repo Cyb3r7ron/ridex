@@ -14,76 +14,81 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  LatLng initialLocation = const LatLng(9.040573977956889, 38.76331086994915);
-  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-
-  @override
-  void initState() {
-    addCustomIcon();
-    super.initState();
-  }
-
-  void addCustomIcon() {
-    BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), "assets/Location_marker.svg")
-        .then(
-      (icon) {
-        setState(() {
-          markerIcon = icon;
-        });
-      },
-    );
-  }
+  final LatLng startPoint = const LatLng(
+      9.040573977956889, 38.76331086994915); // Dummy starting point
+  final LatLng endPoint =
+      const LatLng(9.040573977956889, 38.76331086994915); // Dummy ending point
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // in the below line, we are specifying our app bar.
-      appBar: AppBar(
-        // setting background color for app bar
-        backgroundColor: const Color(0xFFE4F311),
-        // setting title for app bar.
-        title: const Text("Ride"),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 25.0),
-          child: GestureDetector(
-            onTap: _makingPhoneCall,
-            child: const Icon(
-              Icons.phone, // add custom icons also
+      body: Stack(
+        children: [
+          GoogleMap(
+            onMapCreated: (controller) {
+              setState(() {});
+            },
+            initialCameraPosition: CameraPosition(
+              target: startPoint,
+              zoom: 14.0,
+            ),
+            markers: {
+              Marker(
+                markerId: const MarkerId('startPoint'),
+                position: startPoint,
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueAzure),
+              ),
+              Marker(
+                markerId: const MarkerId('endPoint'),
+                position: endPoint,
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueBlue),
+              ),
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add logic for calling
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text('Call'),
+                  ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.indigo,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text('Delivered'),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: initialLocation,
-          zoom: 8,
-        ),
-        markers: {
-          Marker(
-            markerId: const MarkerId("marker1"),
-            position: const LatLng(9.040573977956889, 38.76331086994915),
-            draggable: true,
-            onDragEnd: (value) {
-              // value is the new position
-            },
-            icon: markerIcon,
-          ),
-          const Marker(
-            markerId: MarkerId("marker2"),
-            position: LatLng(9.041075807059414, 38.76387604184933),
-          ),
-        },
+        ],
       ),
     );
   }
 }
 
-_makingPhoneCall() async {
-  var url = Uri.parse("tel:+251931587237");
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
+@override
+Widget build(BuildContext context) {
+  // TODO: implement build
+  throw UnimplementedError();
 }
